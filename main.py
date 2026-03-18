@@ -12,6 +12,16 @@ SCREEN_HEIGHT = 320
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Flappy Bird")
 
+#colors
+BLACK = (0, 0, 0)
+GOLD = (194, 148, 83)
+RED = (161, 73, 67)
+WHITE = (255, 255, 255)
+DARK_GRAY = (30, 30, 30)
+BASE = (107, 106, 105)
+LIGHT_GRAY = (217, 217, 217)
+BRIGHT_GOLD = (255, 215, 0)
+
 # high score that will be tracked
 SAVED_HIGH_SCORE = 0
 
