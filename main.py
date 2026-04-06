@@ -26,16 +26,26 @@ BRIGHT_GOLD = (255, 215, 0)
 SAVED_HIGH_SCORE = 0
 
 # added the images into the GUI
-pony_images = [pygame.image.load("flappygame/assets/pony_up.png"), pygame.image.load("flappygame/assets/pony_mid.png"), pygame.image.load("flappygame/assets/pony_down.png")]
-skyline_image = pygame.image.load("flappygame/assets/background.png")
-ground_image = pygame.image.load("flappygame/assets/ground.png")
-top_fence_image = pygame.image.load("flappygame/assets/fence_top.png")
-bottom_fence_image = pygame.image.load("flappygame/assets/fence_bottom.png")
-game_over_image = pygame.image.load("flappygame/assets/game_over.png")
-start_image = pygame.image.load("flappygame/assets/start.png")
+pony_images = [pygame.image.load("FLAPPY/assets/pony_up.png"), pygame.image.load("FLAPPY/assets/pony_mid.png"), pygame.image.load("FLAPPY/assets/pony_down.png")]
+skyline_image = pygame.image.load("FLAPPY/assets/background.png")
+ground_image = pygame.image.load("FLAPPY/assets/ground.png")
+top_fence_image = pygame.image.load("FLAPPY/assets/fence_top.png")
+bottom_fence_image = pygame.image.load("FLAPPY/assets/fence_bottom.png")
+game_over_image = pygame.image.load("FLAPPY/assets/game_over.png")
+start_image = pygame.image.load("FLAPPY/assets/start.png")
 
 #game - sets the scroll speed, pony position, settings score & changing the score, and
 # puts the fonts on there
+scroll_speed = 4
+last_speedup_score = 0
+fence_lower = 45
+fence_higher = 62
+pony_start_position = (100, 160)
+score = 0
+high_score = SAVED_HIGH_SCORE
+score_font = pygame.font.FONT("FLAPPY/assets/PressStart2P-Regular.ttf", 14)
+small_font = pygame.font.FONT("FLAPPY/assets/PressStart2P-Regular.ttf", 10)
+game_stopped = True
 
 # Function to update high score in the file
 def update_high_score_in_file(new_high_score):
