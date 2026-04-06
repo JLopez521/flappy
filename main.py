@@ -34,6 +34,22 @@ bottom_fence_image = pygame.image.load("flappygame/assets/fence_bottom.png")
 game_over_image = pygame.image.load("flappygame/assets/game_over.png")
 start_image = pygame.image.load("flappygame/assets/start.png")
 
+#game - sets the scroll speed, pony position, settings score & changing the score, and
+# puts the fonts on there
+
+# Function to update high score in the file
+def update_high_score_in_file(new_high_score):
+  """Update the high score directly in the script file"""
+  try:
+    #Getting the path to the current script
+    script_path = os.path.abspath(__file__)
+
+    #Read the file
+    with open(script_path, 'r') as f:
+      content = f.read()
+
+    new_content = re.sub(r'SAVED_HIGH_SCORE = \d+', f'SAVED_HIGH_SCORE = {new_high_score}', content)
+# ENDED HERE CONTINUE CODING FROM HERE
 # exiting game
 def quit_game():
   for event in pygame.event.get():
