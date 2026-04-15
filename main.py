@@ -59,7 +59,44 @@ def update_high_score_in_file(new_high_score):
       content = f.read()
 
     new_content = re.sub(r'SAVED_HIGH_SCORE = \d+', f'SAVED_HIGH_SCORE = {new_high_score}', content)
+
+    # Write the updated content back to the file
+    with open(script_path, 'w') as f:
+        f.write(new_content)
+
+        return True
+  except Exception as e:
+      print(f"Failed to update high score: {e}")
+      return False
 # ENDED HERE CONTINUE CODING FROM HERE
+# Pony Class goes here
+
+# Fence Class
+class Fence(pygame.sprite.Sprite):
+    def __init__(self, x, y, image, fence_type): # takes coordinates of fence, image
+        pygame.sprite.Sprite.__init__(self) #initialize parent class
+        self.image = image # = to image we are passing in agrs
+        # conveinent for checking for collisions
+        self.rect = self.image.get_rect() # manipulate position of img
+        self.rect.x, self.rect.y = x, y # set xy coords of img = to the xy coords we pass in agrs
+        self.enter, self.exit, self.passed = False, False, False
+        self.fence_type = fence_type
+
+    def update(self): # responsible for moving fences from left to right side of screen
+        # move fences
+        self.rect.x -= scroll_speed
+        if self.rect.x <= -SCREEN_WIDTH:
+            self.kill()
+
+        global score
+        if self.fence_type == "bottom":
+            if pony_start_position[0] > self.rect.topleft[0] and not self.passed:
+                self.enter = True
+            if pony_start_position[0] > self.rect.topright[0] and not self.passed:
+                self.exit = True
+            if self.enter and self.exit and not self.passed:
+                self.passed = True
+                score += 1
 # exiting game
 def quit_game():
   for event in pygame.event.get():
