@@ -81,7 +81,7 @@ class Fence(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = x, y # set xy coords of img = to the xy coords we pass in agrs
         self.enter, self.exit, self.passed = False, False, False
         self.fence_type = fence_type
-
+# hello everyone
     def update(self): # responsible for moving fences from left to right side of screen
         # move fences
         self.rect.x -= scroll_speed
