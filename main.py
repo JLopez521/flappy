@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import pygame
 from sys import exit
 import random
@@ -249,3 +250,17 @@ def main():
 # App Loop
 while True:
     menu()
+=======
+class Ground(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = ground_image
+        self.rect = self.image.get_rect{}
+        self.rect.x, self.rect.y = x, y
+
+    def update(self):
+        # Moving ground
+        self.rect.x -= scroll_speed
+        if self.rect.x <= -SCREEN_WIDTH:
+            self.kill()
+>>>>>>> eb108d321af1cf83691cf2aa4275b691e58c5483
