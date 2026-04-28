@@ -70,7 +70,38 @@ def update_high_score_in_file(new_high_score):
       print(f"Failed to update high score: {e}")
       return False
 # ENDED HERE CONTINUE CODING FROM HERE
-# Pony Class goes here
+# Pony Class
+class Pony(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pony_images[0]
+        self.rect = self.image.get.rect()
+        self.rect.center = pony_start_position
+        self.image_index = 0
+        self.vel = 0
+        self.flap = False
+        self.alive = True
+
+    def update(self):
+        # Pony Animation
+        self.image_index += 1
+        if self.image_index >= 30:
+            self.image_index = 0
+        self.image = pony_images[self.image_index // 10]
+
+        # Gravity and Flap
+        self.vel += 0.5
+        if self.vel > 7:
+            self.vel = 7
+        if self.rect.y < 320:
+            self.rect.y += int(self.vel)
+        if self.vel == 0:
+            self.flap = False
+
+        # User Input
+        if pygame.mouse.get_pressed()[0] and not self.flap and self.rect.y > 0 and self.alive:
+            self.flap = True
+            self.vel = -7
 
 # Fence Class
 class Fence(pygame.sprite.Sprite):
@@ -245,6 +276,9 @@ def main():
         clock.tick(30)
         pygame.display.update()
 # menu
+def menu():
+    global game_stopped
+    waiting = True
 
 # App Loop
 while True:
