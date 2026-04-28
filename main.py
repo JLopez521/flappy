@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import pygame
 from sys import exit
 import random
@@ -71,7 +70,38 @@ def update_high_score_in_file(new_high_score):
       print(f"Failed to update high score: {e}")
       return False
 # ENDED HERE CONTINUE CODING FROM HERE
-# Pony Class goes here
+# Pony Class
+class Pony(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pony_images[0]
+        self.rect = self.image.get.rect()
+        self.rect.center = pony_start_position
+        self.image_index = 0
+        self.vel = 0
+        self.flap = False
+        self.alive = True
+
+    def update(self):
+        # Pony Animation
+        self.image_index += 1
+        if self.image_index >= 30:
+            self.image_index = 0
+        self.image = pony_images[self.image_index // 10]
+
+        # Gravity and Flap
+        self.vel += 0.5
+        if self.vel > 7:
+            self.vel = 7
+        if self.rect.y < 320:
+            self.rect.y += int(self.vel)
+        if self.vel == 0:
+            self.flap = False
+
+        # User Input
+        if pygame.mouse.get_pressed()[0] and not self.flap and self.rect.y > 0 and self.alive:
+            self.flap = True
+            self.vel = -7
 
 # Fence Class
 class Fence(pygame.sprite.Sprite):
@@ -246,21 +276,10 @@ def main():
         clock.tick(30)
         pygame.display.update()
 # menu
+def menu():
+    global game_stopped
+    waiting = True
 
 # App Loop
 while True:
     menu()
-=======
-class Ground(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = ground_image
-        self.rect = self.image.get_rect{}
-        self.rect.x, self.rect.y = x, y
-
-    def update(self):
-        # Moving ground
-        self.rect.x -= scroll_speed
-        if self.rect.x <= -SCREEN_WIDTH:
-            self.kill()
->>>>>>> eb108d321af1cf83691cf2aa4275b691e58c5483
