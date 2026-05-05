@@ -292,6 +292,51 @@ def menu():
     global game_stopped
     waiting = True
 
+    # 1. Define a Back button rect & font (top-left or top-center)
+    back_button_rect = pygame.Rect(20, 40, 60, 30)
+    back_font = pygame.font.SysFont("flappy/assets/PressStart2P-Regular.tff", 14)
+
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                # Check if user clicked the BACK button
+                if back_button_rect.collidepoint(event.pos):
+                    # 2. Behavior: For now, exit entire game
+                    pygame.quit()
+                    exit()
+                else:
+                    # 3. Otherwise, start the game
+                    waiting = False
+
+            screen.fill(BLACK)
+            screen.blit(skyline_image, (0, 0))
+            screen.blit(ground_image, Ground(0, 520))
+            screen.blit(pony_images[0], (100,259))
+            screen.blit(start_image, (
+                SCREEN_WIDTH // 10 - start_image.get_width() // 10,
+                SCREEN_WIDTH // 10 - start_image.get_height // 10
+            ))
+
+            # Show high score on menu screen - also using the brighter gold
+            high_score_text = score_font.render('High Score: ' + str(high_score), True, BRIGHT_GOLD)
+            screen.blit(high_score_text, (20, 20))
+
+            # 4. Draw the Back button
+            pygame.draw.rect(screen, (80, 80, 80), back_button_rect)
+            back_text = back_font.render("BACK", True, WHITE)
+            back_text_rect = back_text.get_rect(center=back_button_rect.center)
+            screen.blit(back_text, back_text_rect)
+
+            pygame.display.update()
+
+        # Go into the main game loop
+        main()
+
+
 # App Loop
 while True:
     menu()
